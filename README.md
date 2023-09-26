@@ -48,7 +48,7 @@ print("Hello World")
 
 ```
 - Пример выполнения кода на Jupyter Notebook
-- ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/cee99a71-49f3-436c-bddb-f607f83983a2)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/cee99a71-49f3-436c-bddb-f607f83983a2)
 
 
 
