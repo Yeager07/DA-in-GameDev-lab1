@@ -216,9 +216,20 @@ public class NewBehaviourScript : MonoBehaviour
 
 - Далее добавляем в сцену пустой объект GameObject:
 - ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/07138ce4-90a1-409b-bdba-c1eb106db1bc)
+
+- Добавляем в папку Assets файл со скриптом на языке C# и звуковые файлы
+  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/18ca88db-1eec-41f6-a60a-f45aa8381a53)
+  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f2380831-56e4-480e-83d3-cff933c65a32)
+
+
 - После этого нужно настроить инспектор свойства объекта GameObject следующим образом (подключить скрипт и звуковые дорожки):
 - ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1559db52-edaf-4bbb-9bd9-aaa008fe0075)
-- Запускаем выполнение и наслаждаемся проигрыванием звуковых дорожек, которые мы указали
+  
+- Запускаем выполнение и наслаждаемся проигрыванием звуковых дорожек, которые мы указали (так же можем видеть, что значения, выводимые в консоли Unity, полностью совпадают с значениями из таблицы)
+  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/31197978-08a4-4a04-b893-60d1f82db071)
+  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/a3b6bcd1-d8ce-4bbe-bbd8-517fb8fabb9e)
+
+
 
 ## Выводы
 - В ходе данной лабораторной работы я познакомился с визуализацией даных из таблицы GoogleSheets в Unity, с их визуализацие и работой со звуковыми эффектами в Unity с помощью скриптов на языках Python и C#. Смог вывести изменить условия воспроизведения звуков и прослушал эти звуки, в зависимости от данных из Google-таблицы, которые были получены с помощью скрипта на языке Python.
