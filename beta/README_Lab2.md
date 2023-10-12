@@ -104,7 +104,7 @@ while i <= len(mon):
   ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6b054f70-2260-45e1-b27f-f61580c54e69)
   ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/720c5f36-b868-45f9-b951-f1ec732046e1)
 
-- Визуализаци данных с помощью средств Google-Sheets:
+- Визуализаци данных с помощью средств Google-Sheets (на оси X представлены полченные значения; а на оси Y-их процентное соотношение, высчитанное по формуле из кода на языке Python):
   ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/65fd02af-03d3-4610-9e7f-238d802ca3bd)
 
 
