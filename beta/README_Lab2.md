@@ -215,9 +215,9 @@ public class NewBehaviourScript : MonoBehaviour
   ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/87189841-4a8a-467b-b669-7a83bac64ba5)
 
 - Далее добавляем в сцену пустой объект GameObject:
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/07138ce4-90a1-409b-bdba-c1eb106db1bc)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/07138ce4-90a1-409b-bdba-c1eb106db1bc)
 - После этого нужно настроить инспектор свойства объекта GameObject следующим образом (подключить скрипт и звуковые дорожки):
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1559db52-edaf-4bbb-9bd9-aaa008fe0075)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1559db52-edaf-4bbb-9bd9-aaa008fe0075)
 - Запускаем выполнение и наслаждаемся проигрыванием звуковых дорожек, которые мы указали
 
 ## Выводы
