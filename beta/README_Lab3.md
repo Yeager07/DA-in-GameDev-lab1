@@ -117,127 +117,35 @@ while i <= len(mon):
 
 
 ## Задание 3
-### Настроить на сцене Unity воспроизведение звуковых файлов, описывающих динамику изменения выбранной переменной. Например, если выбрано здоровье главного персонажа вы можете выводить сообщения, связанные с его состоянием.
+### Решение в 80+ баллов должно заполнять google-таблицу данными из Python. В Python данные также должны быть визуализированы.
+
 Ход работы:
-(Для дальнейшей работы возьмем данные, сгенерированные с помощью кода, описанного в предыдущем задании)
-- Для того, чтобы звуки воспроизводились в Unity, нужен следующий код на языке C#:
-```C#
+- Написать код заполняющий Google таблицу данными из скрипта. Результатом является скрин с первого задания. В Unity также данные изменяются. Результат изменения данных в Unity - скриншоты со 2 задания.
+- 
+```py
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-using SimpleJSON;
+import gspread
+import random
 
-public class NewBehaviourScript : MonoBehaviour
-{
-    public AudioClip goodSpeak;
-    public AudioClip normalSpeak;
-    public AudioClip badSpeak;
-    private AudioSource selectAudio;
-    private Dictionary<string, float> dataSet = new Dictionary<string, float>();
-    private bool statusStart = false;
-    private int i = 1;
+gc = gspread.service_account(filename='enduring-button-401711-f2400eac09f9.json')
+sh = gc.open("Workshop3-Баланс в играх")
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(GoogleSheets());
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (dataSet.Count == 0) return;
+def set_values(column, start_min, start_max, delta):
+    count = 2
+    limit_min = start_min
+    limit_max = start_max
+    while count < 11:
+        count += 1
+        sh.sheet1.update((column + str(count)), str(random.uniform(limit_min, limit_max)))
+        limit_min, limit_max = limit_min + delta, limit_max + delta
 
-        if (dataSet["Mon_" + i.ToString()] > 100 & statusStart == false & i != dataSet.Count)
-        {
-            StartCoroutine(PlaySelectAudioGood());
-            Debug.Log(dataSet["Mon_" + i.ToString()]);
-        }
 
-        if (dataSet["Mon_" + i.ToString()] > 10 & dataSet["Mon_" + i.ToString()] < 100 & statusStart == false & i != dataSet.Count)
-        {
-            StartCoroutine(PlaySelectAudioNormal());
-            Debug.Log(dataSet["Mon_" + i.ToString()]);
-        }
-
-        if (dataSet["Mon_" + i.ToString()] <= 10 & statusStart == false & i != dataSet.Count)
-        {
-            StartCoroutine(PlaySelectAudioBad());
-            Debug.Log(dataSet["Mon_" + i.ToString()]);
-        }
-    }
-
-    IEnumerator GoogleSheets()
-    {
-        //https://docs.google.com/spreadsheets/d/1H8NQd7gLpebbL2FP3OfZFlVCu7aluN6y4JKxrS4H7tE/edit?usp=sharing
-        UnityWebRequest curentResp = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1H8NQd7gLpebbL2FP3OfZFlVCu7aluN6y4JKxrS4H7tE/values/Лист1?key=AIzaSyA8cQwYwFO0Zl0RYh3XIhfdmc4xNKHd7a4");
-        yield return curentResp.SendWebRequest();
-        string rawResp = curentResp.downloadHandler.text;
-        var rawJson = JSON.Parse(rawResp);
-        foreach (var itemRawJson in rawJson["values"])
-        {
-            var parseJson = JSON.Parse(itemRawJson.ToString());
-            var selectRow = parseJson[0].AsStringList;
-            dataSet.Add(("Mon_" + selectRow[0]), float.Parse(selectRow[2]));
-        }
-    }
-
-    IEnumerator PlaySelectAudioGood()
-    {
-        statusStart = true;
-        selectAudio = GetComponent<AudioSource>();
-        selectAudio.clip = goodSpeak;
-        selectAudio.Play();
-        yield return new WaitForSeconds(3);
-        statusStart = false;
-        i++;
-    }
-    IEnumerator PlaySelectAudioNormal()
-    {
-        statusStart = true;
-        selectAudio = GetComponent<AudioSource>();
-        selectAudio.clip = normalSpeak;
-        selectAudio.Play();
-        yield return new WaitForSeconds(3);
-        statusStart = false;
-        i++;
-    }
-    IEnumerator PlaySelectAudioBad()
-    {
-        statusStart = true;
-        selectAudio = GetComponent<AudioSource>();
-        selectAudio.clip = badSpeak;
-        selectAudio.Play();
-        yield return new WaitForSeconds(4);
-        statusStart = false;
-        i++;
-    }
-}
-
+set_values(column='B', start_min=5, start_max=5.5, delta=1.50)
+set_values(column='C', start_min=11, start_max=12, delta=0.75)
+set_values(column='D', start_min=1.8, start_max=1.9, delta=-0.15)
 
 ```
-- Обговорим условие воспроизведения звуковых дорожек:
-  Если процентное соотношение будет < 10, то воспроизводится звук "Плохо"; Если процентное соотношение > 10, но < 100-звук "Нормально". ведь это будет означать, что нам не хватит накопленных ресурсов; А если процентное соотношение > 100-звук "Отлично":
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/87189841-4a8a-467b-b669-7a83bac64ba5)
-
-- Далее добавляем в сцену пустой объект GameObject:
-- ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/07138ce4-90a1-409b-bdba-c1eb106db1bc)
-
-- Добавляем в папку Assets файл со скриптом на языке C# и звуковые файлы
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/18ca88db-1eec-41f6-a60a-f45aa8381a53)
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f2380831-56e4-480e-83d3-cff933c65a32)
-
-
-- После этого нужно настроить инспектор свойства объекта GameObject следующим образом (подключить скрипт и звуковые дорожки):
-- ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1559db52-edaf-4bbb-9bd9-aaa008fe0075)
-  
-- Запускаем выполнение и наслаждаемся проигрыванием звуковых дорожек, которые мы указали (так же можем видеть, что значения, выводимые в консоли Unity, полностью совпадают с значениями из таблицы)
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/31197978-08a4-4a04-b893-60d1f82db071)
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/a3b6bcd1-d8ce-4bbe-bbd8-517fb8fabb9e)
-
-
 
 ## Выводы
 - В ходе данной лабораторной работы я познакомился с визуализацией даных из таблицы GoogleSheets в Unity, с их визуализацие и работой со звуковыми эффектами в Unity с помощью скриптов на языках Python и C#. Смог вывести изменить условия воспроизведения звуков и прослушал эти звуки, в зависимости от данных из Google-таблицы, которые были получены с помощью скрипта на языке Python.
