@@ -59,61 +59,7 @@
 
 
 ## Задание 2
-### С помощью скрипта на языке Python заполнитm google-таблицу данными, описывающими выбранную игровую переменную в выбранной игре. Средствами google-sheets визуализируйте данные в google-таблице для наглядного представления выбранной игровой величины.
-
-Ход работы:
-- Для начала нужно реализовать код на языке Python и настроить свзяь с Google-таблицей.
-Для этого нужно создать новый проект в GoogleCloud:
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/bb71f8c1-bebb-4743-a032-4571f40add22)
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/c722f3d6-e773-4101-91f8-0cdaef331ee6)
-
-- Установить дополнительные продукты для дальнейшей работы:
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/4aa5e99b-0ced-47fd-b5ba-eb78d0c86e55)
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/fa61e1a6-ced5-4b6c-940b-faebdd715dfe)
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/3c7296c4-ee74-4b21-842a-a4d52cc85bb5)
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0165d723-fc17-4bfe-98ef-e13ba38e4276)
-
-- Создать API-ключ и настроить доступ к нашей таблице по ссылке:
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/88833fa7-402a-47c3-ae1b-9a0ac00ad6f8)
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2f6a2ded-960e-4f40-a283-512cc1c8f3be)
-![2023-10-11_18-51-21](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/de6ef14c-37b6-4303-889a-b83526807560)
-
-- Чтобы убедиться что мы сделали все правильно, запустим следу.щий код, чтобы проверить, что полученные данные генерируются в нашей таблице:
-```py
-
-import gspread
-import numpy as np
-gc = gspread.service_account(filename='unitydatascience-400014-da50a8398902.json')
-sh = gc.open("UnityWorkshop2")
-price = np.random.randint(2000, 10000, 11)
-mon = list(range(1,11))
-i = 0
-while i <= len(mon):
-    i += 1
-    if i == 0:
-        continue
-    else:
-        tempInf = ((price[i-1]-price[i-2])/price[i-2])*100
-        tempInf = str(tempInf)
-        tempInf = tempInf.replace('.',',')
-        sh.sheet1.update(('A' + str(i)), str(i))
-        sh.sheet1.update(('B' + str(i)), str(price[i-1]))
-        sh.sheet1.update(('C' + str(i)), str(tempInf))
-        print(tempInf)
-
-```
-- По результату можно понять, что полученные данные выводятся в нашей Google-таблице (сравнение результатов из консоли и из таблицы):
-![2023-10-11_18-49-00](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/4d735f1f-a27d-4f34-b26a-2cb4e1ce4da8)
-![2023-10-11_18-48-41](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/96b5bd1c-a6f2-40c2-ad6b-016d1bc29708)
-- Следующим шагом нужно немного переделать исходный код.
-  Так как наш ресур может изменяться от 0 до 160, то и генерировать числа мы будем в этом диапазоне.
-  В первом столбце таблицы будет показываться номер итерации; Во втором-сгенерированное число; А в третьем-процентное соотношение разницы полученного и предыдущего числа в сравнении с минимальным значением, необходимым для получения награды (минимальное значение-40)
-  Сверим полученные значения:
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6b054f70-2260-45e1-b27f-f61580c54e69)
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/720c5f36-b868-45f9-b951-f1ec732046e1)
-
-- Визуализаци данных с помощью средств Google-Sheets (на оси X представлены полченные значения; а на оси Y-их процентное соотношение, высчитанное по формуле из кода на языке Python):
-  ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/65fd02af-03d3-4610-9e7f-238d802ca3bd)
+### 
 
 
 ## Задание 3
