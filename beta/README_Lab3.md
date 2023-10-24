@@ -79,9 +79,7 @@ public class GoogleSheetsParser : MonoBehaviour
 {
     private List<float[]> data = new List<float[]>();
 
-    private readonly string uri = "https://sheets.googleapis.com/v4/spreadsheets/" +
-            "1OzlxX6G3bSaRnJ1VfVkes8sOARoCrRixCk0mSf67HCg/values/A1%3AZ100" +
-            "?key=1H8NQd7gLpebbL2FP3OfZFlVCu7aluN6y4JKxrS4H7tE";
+    private readonly string uri = "https://sheets.googleapis.com/v4/spreadsheets/1H8NQd7gLpebbL2FP3OfZFlVCu7aluN6y4JKxrS4H7tE/values/A1%3AZ100?key=AIzaSyA8cQwYwFO0Zl0RYh3XIhfdmc4xNKHd7a4";
 
     public List<float[]> Data => data;
 
