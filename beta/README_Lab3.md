@@ -61,9 +61,116 @@
 ### Создать 10 сцен на Unity с изменяющимся уровнем сложности.
 Ход работы:
 - Создать ещё 9 аналогичных сцен, написать код, который будет считывать данные из таблицы и менять знаечния у нужных переменным в зависимости от уровня.
-- Я продублировал исходную сцену 9 раз и поменял значения у переменных, отвечающих за поведение дракона: "Speed", "TimeBetweenEgg", "LeftRightDistance".
+- Я продублировал исходную сцену 9 раз и для каждой сцены установил значения переменных с помощью скрипта на языке C#, которые отвечают за поведение дракона: "Speed", "TimeBetweenEgg", "LeftRightDistance".
 - ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/90427a74-5d6c-4ab9-af99-cb789877e097)
 
+## Для того, чтобы переменные приняли нужные значения из нашей Google-Таблицы, я я использовал следующий код на языке C# из предыдущей лабораторной работы, который немнго переделал для данной работы:
+
+```C#
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using SimpleJSON;
+using System.Globalization;
+
+public class GoogleSheetsParser : MonoBehaviour
+{
+    private List<float[]> data = new List<float[]>();
+
+    private readonly string uri = "https://sheets.googleapis.com/v4/spreadsheets/" +
+            "1OzlxX6G3bSaRnJ1VfVkes8sOARoCrRixCk0mSf67HCg/values/A1%3AZ100" +
+            "?key=1H8NQd7gLpebbL2FP3OfZFlVCu7aluN6y4JKxrS4H7tE";
+
+    public List<float[]> Data => data;
+
+    public IEnumerator ParseGoogleSheets()
+    {
+        UnityWebRequest curentResp = UnityWebRequest.Get(uri);
+
+        yield return curentResp.SendWebRequest();
+        string rawResp = curentResp.downloadHandler.text;
+        var rawJson = JSON.Parse(rawResp);
+
+        foreach (var itemRawJson in rawJson["values"])
+        {
+            var parseJson = JSON.Parse(itemRawJson.ToString());
+            var selectRow = parseJson[0].AsStringList;
+            var count = 0;
+            var arr = new float[3];
+
+            foreach (var row in selectRow)
+            {
+                if (float.TryParse(row, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out _) & count <= 3)
+                {
+                    arr[count] = float.Parse(row, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"));
+                    count++;
+                }
+
+                if (count == 3) data.Add(arr);
+            }
+        }
+    }
+}
+
+```
+- А также немного изменил код EnemyDragon.cs, чтобы знаечния, полученные из Google-Таблицы, присваивались нужным переменным в зависимости от номера уровня (1-10):
+
+```C#
+
+using UnityEngine;
+
+public class EnemyDragon : MonoBehaviour
+{
+    [SerializeField] private GoogleSheetsParser parser;
+    [SerializeField] private int levelIndex;
+
+    public GameObject dragonEggPrefab;
+    public float speed;
+    public float leftRightDistance;
+    public float timeBetweenEggDrops;
+    public float chanceDirection;
+
+    private void Start()
+    {
+        Invoke(nameof(Initialize), 1f);
+        Invoke("DropEgg", 2f);
+    }
+
+    private void Update()
+    {
+        Vector3 pos = transform.position;
+        pos.x += speed * Time.deltaTime;
+        transform.position = pos;
+
+        if (pos.x < -leftRightDistance) speed = Mathf.Abs(speed);
+        else if (pos.x > leftRightDistance) speed = -Mathf.Abs(speed);
+    }
+
+    private void DropEgg()
+    {
+        Vector3 myVector = new Vector3(0.0f, 5.0f, 0.0f);
+        GameObject egg = Instantiate(dragonEggPrefab);
+        egg.transform.position = transform.position + myVector;
+        Invoke("DropEgg", timeBetweenEggDrops);
+    }
+
+    private void Initialize()
+    {
+        speed = parser.Data[levelIndex][0];
+        leftRightDistance = parser.Data[levelIndex][1];
+        timeBetweenEggDrops = parser.Data[levelIndex][2];
+        chanceDirection = 0.01f;
+    }
+
+    private void FixedUpdate() 
+    {
+        if (Random.value < chanceDirection) speed *= -1;
+    }
+}
+
+```
 
 
 ## Задание 3
@@ -123,9 +230,8 @@ plt.ylabel("Номер уровня")
 plt.xlabel("Сгенерированное значение")
 plt.show()
 
-
-
 ```
+
 ## Результат визуализации данных в Python:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/7aba4993-6d97-4411-9cdc-28de9590cf6b)
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2f67a58f-bbd9-40a2-beb8-ccd2683b3687)
