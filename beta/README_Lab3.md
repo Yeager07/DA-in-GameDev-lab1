@@ -148,15 +148,17 @@ set_values(column='D', start_min=1.8, start_max=1.9, delta=-0.15)
 ```
 
 ## Выводы
-- В ходе данной лабораторной работы я познакомился с визуализацией даных из таблицы GoogleSheets в Unity, с их визуализацие и работой со звуковыми эффектами в Unity с помощью скриптов на языках Python и C#. Смог вывести изменить условия воспроизведения звуков и прослушал эти звуки, в зависимости от данных из Google-таблицы, которые были получены с помощью скрипта на языке Python.
+- В ходе данной лабораторной работы я попробовал настроить баланс в игре (на примере игры Dragon Picker), смоделировал 10 различных сцен в Unity на основе данных, полученных из Google-Таблицы, с помощью кода на языке C#, а также повторил способ отображения данных в Google-Таблице, полученных с помощью скрипта на языке Python.
 
 
 | Plugin | README |
 | ------ | ------ |
 | GitHub | [plugins/github/README.md][PlGh] |
 | Visual Studio| [plugins/visualstudio/README.md][PlGh] |
+| DropBox | [plugins/dropbox/README.md][PlGh] |
 | Unity | [plugins/unity/README.md][PlMe] |
-| Pucharm | [plugins/pycharm/README.md][PlGa] |
+| Google Drive | [plugins/googledrive/README.md][PlGh] |
+| Pycharm | [plugins/pycharm/README.md][PlGa] |
 
 ## Powered by
 
