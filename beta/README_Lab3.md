@@ -70,8 +70,15 @@
 
 ```py
 
+from matplotlib import pyplot as plt
 import gspread
 import random
+
+
+speed = [4]
+leftRightWidth = [10]
+timeBetweenEggDrops = [2]
+level = [1, 2, 3, 4, 5, 6 ,7, 8, 9, 10]
 
 gc = gspread.service_account(filename='enduring-button-401711-f2400eac09f9.json')
 sh = gc.open("Workshop3-Баланс в играх")
@@ -81,20 +88,43 @@ def set_values(column, start_min, start_max, delta):
     count = 2
     limit_min = start_min
     limit_max = start_max
+    array = []
     while count < 11:
         count += 1
+        array.append(random.uniform(limit_min, limit_max))
         sh.sheet1.update((column + str(count)), str(random.uniform(limit_min, limit_max)))
         limit_min, limit_max = limit_min + delta, limit_max + delta
+    return array
 
 
-set_values(column='B', start_min=5, start_max=5.5, delta=1.50)
-set_values(column='C', start_min=11, start_max=12, delta=0.75)
-set_values(column='D', start_min=1.8, start_max=1.9, delta=-0.15)
+speed += (set_values(column='B', start_min=5, start_max=5.5, delta=1.50))
+leftRightWidth += (set_values(column='C', start_min=11, start_max=12, delta=0.75))
+timeBetweenEggDrops += (set_values(column='D', start_min=1.8, start_max=1.9, delta=-0.15))
+
+plt.plot(speed, level)
+plt.title("Скорость дракона")
+plt.ylabel("Номер уровня")
+plt.xlabel("Сгенерированное значение")
+plt.show()
+
+plt.plot(leftRightWidth, level)
+plt.title("Расстояние, на которое перемещается дракон")
+plt.ylabel("Номер уровня")
+plt.xlabel("Сгенерированное значение")
+plt.show()
+
+plt.plot(timeBetweenEggDrops, level)
+plt.title("Время между бросками яиц")
+plt.ylabel("Номер уровня")
+plt.xlabel("Сгенерированное значение")
+plt.show()
+
+
 
 ```
 
 ## Выводы
-- В ходе данной лабораторной работы я попробовал настроить баланс в игре (на примере игры Dragon Picker), смоделировал 10 различных сцен в Unity на основе данных, полученных из Google-Таблицы, с помощью кода на языке C#, а также повторил способ отображения данных в Google-Таблице, полученных с помощью скрипта на языке Python.
+- В ходе данной лабораторной работы я попробовал настроить баланс в игре (на примере игры Dragon Picker), смоделировал 10 различных сцен в Unity на основе данных, полученных из Google-Таблицы, с помощью кода на языке C#, визуализировал изменение переменных с помощью библиотеки matplotlib, а также повторил способ отображения данных в Google-Таблице, полученных с помощью скрипта на языке Python.
 
 
 | Plugin | README |
