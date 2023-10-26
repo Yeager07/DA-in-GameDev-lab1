@@ -412,13 +412,155 @@ public class Perceptron : MonoBehaviour {
 
 Количество эпох обучения зависит от решаемой операции. Например при операции OR ошибок не встречается уже на пятой эпохе обучения, при AND и NAND - при седьмой, при XOR - при восьмой. Статистика не совсем точная, так как взято небольшое количество попыток, всего 5.
 
-
-
-
-
 ## Задание 3
 ### Визуализировать работу персептрона с помощью физуальной модели на сцене Unity.
 Ход работы:
+- Создать сцену в Unity, добавить несколько кубов, плоскость(сделал фиолетовую, т.к. мой любимый цвет, не судите строго) и визуализировать каждую логическую операцию.
+- Для начала я создал сцену с тремя вариантами возможными вариантами, в которой черный куб симвализирует 0 (Ложь), а белый - 1 (Истина); возможно всего три варианта пар значений: (0 0), (0 1)/(1 0) и (1 1).
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
+
+При столкновении кубов, они оба должны окраситься в цвет результата той или иной операции (напомню, черный цвет означает 0 (Ложь), а белый - 1 (Истина)).
+
+Для этого в коде я завел две новые переменные, которые будут отвечать за значение, которое представляет собой куб (0 или 1). И уже эти значения нужно будет подставлять в функцию CalcOutput для определения результата операции после обучения модели. Также у верхнего куба нужно назначить Rigidbody, а у нижнего - Is trigger. поэтому старый код немного поменялся, вот новый код:
+
+```C#
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class TrainingSet
+{
+	public double[] input;
+	public double output;
+}
+
+
+public class Perceptron : MonoBehaviour {
+	// public TrainingSet[] tsOR;
+	// public TrainingSet[] tsNAND;
+	public TrainingSet[] ts;
+
+	public double firstCube;
+	public double secondCube;
+	double[] weights = {0,0};
+	double bias = 0;
+	double totalError = 0;
+
+	double DotProductBias(double[] v1, double[] v2) 
+	{
+		if (v1 == null || v2 == null)
+			return -1;
+	 
+		if (v1.Length != v2.Length)
+			return -1;
+	 
+		double d = 0;
+		for (int x = 0; x < v1.Length; x++)
+		{
+			d += v1[x] * v2[x];
+		}
+
+		d += bias;
+	 
+		return d;
+	}
+
+	double CalcOutput(int i, TrainingSet[] set)
+	{
+		double dp = DotProductBias(weights,set[i].input);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void InitialiseWeights()
+	{
+		for(int i = 0; i < weights.Length; i++)
+		{
+			weights[i] = Random.Range(-1.0f,1.0f);
+		}
+		bias = Random.Range(-1.0f,1.0f);
+	}
+
+	void UpdateWeights(int j, TrainingSet[] set)
+	{
+		double error = set[j].output - CalcOutput(j, set);
+		totalError += Mathf.Abs((float)error);
+		for(int i = 0; i < weights.Length; i++)
+		{			
+			weights[i] = weights[i] + error * set[j].input[i]; 
+		}
+		bias += error;
+	}
+
+	double CalcOutput(double i1, double i2)
+	{
+		double[] inp = new double[] {i1, i2};
+		double dp = DotProductBias(weights,inp);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void Train(int epochs, TrainingSet[] set)
+	{
+		InitialiseWeights();
+		
+		for(int e = 0; e < epochs; e++)
+		{
+			totalError = 0;
+			for(int t = 0; t < set.Length; t++)
+			{
+				UpdateWeights(t, set);
+				Debug.Log("W1: " + (weights[0]) + " W2: " + (weights[1]) + " B: " + bias);
+			}
+			Debug.Log("TOTAL ERROR: " + totalError);
+		}
+	}
+
+	void Start () {
+		// Train(8, tsOR);
+		// double tsOr0 = CalcOutput(0,0); //0
+		// double tsOr1 = CalcOutput(0,1); //1
+		// double tsOr2 = CalcOutput(1,0); //1
+		// double tsOr3 = CalcOutput(1,1); //1
+		
+		// Train(8, tsNAND);
+		// double tsNAND0 = CalcOutput(0,0); //1
+		// double tsNAND1 = CalcOutput(0,1); //1
+		// double tsNAND2 = CalcOutput(1,0); //1
+		// double tsNAND3 = CalcOutput(1,1); //0
+		Train(8, ts);
+	}
+	
+	void Update () {
+		
+	}
+	private void OnTriggerEnter(Collider other) {
+		if (CalcOutput(firstCube, secondCube) == 0) {
+			other.gameObject.GetComponent<Renderer>().material.color = Color.black;
+        	this.gameObject.GetComponent<Renderer>().material.color = Color.black;
+		}
+		else {
+			other.gameObject.GetComponent<Renderer>().material.color = Color.white;
+        this.gameObject.GetComponent<Renderer>().material.color = Color.white;
+		}
+    }
+}
+
+```
+### OR (Логическое сложение(ИЛИ)):
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6409610f-2729-41f5-8c3b-9d7dad0fcaaa)
+
+
+### AND (Логическое умножение(И)):
+
+
+### NAND (Инвертированное Логическое умножение(НЕ И)):
+
+
+### XOR (Исключающая Логическая сумма((ИЛИ) и (НЕ И))):
+
 
 
 
