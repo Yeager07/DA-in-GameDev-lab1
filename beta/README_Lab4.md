@@ -552,15 +552,30 @@ public class Perceptron : MonoBehaviour {
 ### OR (Логическое сложение(ИЛИ)):
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6409610f-2729-41f5-8c3b-9d7dad0fcaaa)
 
+Результат:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/3aa90636-2b24-4e62-84e6-5f50bebff057)
+
+
 
 ### AND (Логическое умножение(И)):
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
+
+Результат:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/c584c9c8-1167-45f7-8983-d35788ae9a3c)
 
 
 ### NAND (Инвертированное Логическое умножение(НЕ И)):
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
+
+Результат:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/dad9d8d2-17d9-4dd0-803e-039c67c20c1c)
 
 
 ### XOR (Исключающая Логическая сумма((ИЛИ) и (НЕ И))):
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
 
+Результат:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f8556dff-97b3-47ce-be92-aa05f17f55c6)
 
 
 
