@@ -563,6 +563,9 @@ public class Perceptron : MonoBehaviour {
 
 Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0fb4853e-3e4e-4f4a-892b-835ea6a8c2e7)
+Процесс выполнения:
+![203351408-9844174f-4b46-4eed-9e82-bceece979c1a](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0f123e5e-d264-4f4c-a8cf-bfaf1fb74056)
+
 
 
 
