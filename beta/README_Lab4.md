@@ -555,7 +555,8 @@ public class Perceptron : MonoBehaviour {
 - Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2ebc2721-951b-4b4e-8618-0025b91a07e9)
 - Процесс выполнения:
-![203351408-9844174f-4b46-4eed-9e82-bceece979c1a](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0f123e5e-d264-4f4c-a8cf-bfaf1fb74056)
+![OR](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/ac5e1d3f-6cbe-44e3-a0aa-22668930cc1f)
+
 
 
 
@@ -573,16 +574,21 @@ public class Perceptron : MonoBehaviour {
 ### NAND (Инвертированное Логическое умножение(НЕ И)):
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
 
-Результат:
+- Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2642eaa8-fc3a-4105-8486-2b5c7d4347c7)
+- Процесс выполнения:
+![NAND](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f7e5be35-887b-4574-8f21-9067cefc3228)
+
 
 
 
 ### XOR (Исключающая Логическая сумма((ИЛИ) и (НЕ И))):
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
 
-Результат:
+- Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/5dc84337-963c-4254-ac9d-5e2d90f858a4)
+- Процесс выполнения:
+![XOR](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/9640483d-b80c-4125-b7ce-ef780131cc2d)
 
 
 
