@@ -25,7 +25,7 @@
 - Данные о работе: название работы, фио, группа, выполненные задания.
 - Цель работы.
 - Задание 1.
-- В проекте реализовать перцептрон, который умеет производить вычисления: OR, AND, NAND, XOR, и дать комментарии о кореектности работы.
+- В проекте реализовать персептрон, который умеет производить вычисления: OR, AND, NAND, XOR, и дать комментарии о кореектности работы.
 - Задание 2.
 - С помощью скрипта на языке Python заполнитm google-таблицу данными, описывающими выбранную игровую переменную в выбранной игре. Средствами google-sheets визуализируйте данные в google-таблице для наглядного представления выбранной игровой величины.
 - Задание 3.
@@ -36,7 +36,7 @@
 Научиться передавать в Unity данные из Google Sheets с помощью Python.
 
 ## Задание 1
-### Выберать одну из компьютерных игр, привести скриншот её геймплея и краткое описание концепта игры. Выберать одну из игровых переменных в игре, описать её роль в игре, условия изменения / появления и диапазон допустимых значений. Построить схему экономической модели в игре и указать место выбранного ресурса в ней.
+### В проекте реализовать перцсптрон, который умеет производить вычисления: OR, AND, NAND, XOR, и дать комментарии о корректности работы.
 
 Ход работы:
 - Для начала я создал пустой проект на Unity. Добавил на сцену пустой объект и прикрепил к нему следующий код на языке C#:
@@ -145,9 +145,9 @@ public class Perceptron : MonoBehaviour {
 
 ```
 ## Рассмотрим реализацию логических операций:
-### 1) OR (Логическое ИЛИ):
+### 1) OR (Логическое сложение(ИЛИ)):
 - Таблица:
-- 
+ 
 | A | B | A OR B |
 |-- |-- | ------ |
 | 0 | 0 | 0 |
@@ -155,14 +155,237 @@ public class Perceptron : MonoBehaviour {
 | 1 | 0 | 1 |
 | 1 | 1 | 1 |
 
-- Концепт игры: Приключенческая игра с открытым миром. Это означает, что на той стороне реки или горы вас ожидает новый, восхитительный пейзаж, нужно лишь разумно расходовать силы. Если вам повстречается блуждающая фея или странный механизм, дерзните и попробуйте разгадать их тайну. Но что они сулят — беду или приятный сюрприз — сможете узнать только вы! В игре также есть:
-- Взаимодействие стихий и разнообразные боевые тактики; - Визуальный стиль и прекрасная музыка; - Отправляйтесь в путешествие с компаньонами.(взято с официального сайта HoYolab)
-- Скриншот геймплея игры:
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6d750150-073a-4d02-8d79-616d6881512d)
-- Для описания ресурса я выбрал первородную смолу.
-- Описание: данный ресурс появляется у игрока каждый день; в течение 8 минут восстанавливается в количестве одной единицы; нужен для получения наград после прохождения босов или испытаний; можно восстановить за счет слабой смолы (отдельный игровой ресурс).
-- Ниже предсавлена примерная экономическая модель данного ресурса:
-![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/785ff3fb-f7e7-4b1b-ba86-d9c9b8d6f0c1)
+- Установим следующие значние для работы персептрона:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/abd46c17-e1d6-468a-b7e5-3d7dad83fb28)
+
+- С начаал зададим 1 обучающую эпоху и посмотрим на результаты тестов:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1dda91db-4365-43bb-b8a0-eba3d6687f82)
+
+Небольшое пояснение: в нашем случае значение Total Error отвечает за обучение персептрона: если оно отлично от нуля, то модель не обучилась, если же ноль - тогда модель успешно обучилась. При первой эпохе обучения значение Total Error = 2, и из результатов тестов видно, что значения отличны от истины: в первом случае, ответ 1, хотя должен быть 0.
+
+- Зададим большее количество эпох, например, 4:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/bb4f834d-9ae8-4ca9-b8fe-5c910d2c95bc)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/55f2ba26-a4c6-444c-a8fc-9a12f9b93b07)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/c4ec003f-e29b-4ad7-9d9b-c0ff1b9ba388)
+
+- В данном случае уже при четвертой эпохе обучения Totl Error равняется нулю, и мы видим из результатов тестов, что модель успешно обучилась. Повторим запуск программы с 4 эпохами обучения:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/4655bba0-62b7-4794-bac3-52681a4f2178)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/23c2bfba-8342-43e2-a5ae-e5ef688955fc)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/58781137-59a5-48c9-badf-7d16b139be0f)
+
+По этим результатам можно сделать вывод, что не всегда 4 эпохи обучения достаточно, бывает, что и при 4 итерации Total Error отлично от нуля и программа работает некорректно.
+В ходе подбора количества эпох обучения, в моем случае, на пятой эпохе значение Total Error равно нулю. (Подробные значения на каждой эпохе я буду разбирать во втором задании с построением графиком на основе количества эпох обучения.)
+
+### 2) AND (Логическое умножение(И)):
+- Таблица:
+ 
+| A | B | A AND B |
+|-- |-- | ------ |
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+- Установим следующие знаечния дя работы персептрона:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/277429b8-36b2-49f6-b791-de0d3017dada)
+
+Для начала зададим 1 обучающую эпоху и посмотрим на результаты наших тестов:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/d094eb1e-9192-48b4-8d59-88d255cc4d71)
+
+Собственно, как и в случае с OR, 1 эпохи обучения недостаточно для корректных ответов.
+
+- Зададим 4 эпохи обучения:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/ff90a28e-db11-4716-b44b-da093d6aa1bc)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/67d1eb3f-6ae5-4044-98cc-d7e3e204dcac)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/d8925398-7f97-49d3-a36a-30e889044a71)
+
+- При данной операции 4 эпох для обучения недостаточно. Попробуем снова:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/873d2013-21c1-4e64-bf40-7bdce60c2a67)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f1905def-74d8-4927-8f03-4a8f929d35af)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/cdad90d4-cf00-4b49-8bd9-08964e464f69)
+
+В этот раз 4 эпохи обучения было достаточно. О подробных значениях при каждой эпохе будет описано подробнее во втором задании.
+
+### 3) NAND (Инвертированное Логическое умножение(НЕ И)):
+- Таблица:
+ 
+| A | B | A NAND B |
+|-- |-- | ------ |
+| 0 | 0 | 1 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+- Установим следующие значения для нашего скрипта:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/c9d96d08-3938-4c94-8a30-9517bb866001)
+
+- Как и в прошлых операция, для начала зададим 1 эпоху обучения и посмотрим на результаты наших тестов:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/791cf2d0-7f1f-4ed9-b7f3-96119226e4b4)
+
+Можно сделать вывод, что при одной эпохи для обучения мало (это подтверждается уже на трех логических операциях).
+
+- Установим 4 эпохи обучения:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/79fa7490-0ff8-4300-8a9a-9bf7f393fad6)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2494cc55-5180-40ee-8f43-c267dbef874a)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/4f699905-fc2c-4ba6-8226-2b3ad2e942b6)
+
+Четырех эпох обучения мало (проверил на нескольких запусках)
+
+- Установим 8 эпох обучения:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/1f197b17-62b8-47c9-954c-70e441645028)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/9bc51402-2d80-48e2-8416-4ed0235cb1d3)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/db362c36-d9fe-4d46-b0d2-0c203d3092c3)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/66fb5f5e-0322-4923-8425-380b6ca5a462)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0a2c41f6-3c2f-47ea-abed-201c91438c0f)
+
+В данной попытке уже при шестой эпохе обучения значение Total Error было равно нулю. Подробные значения рассмотрим во втором задании.
+
+### 4) XOR (Исключающая Логическая сумма((ИЛИ) и (НЕ И))):
+- Таблица:
+ 
+| A | B | A XOR B |
+|-- |-- | ------ |
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+- Установим следующие значения для нашего скрипта:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/94e42a5a-7626-4e7e-8255-b241a5349fed)
+
+И сразу назначим 4 эпохи обучения:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/54fa8aa8-38bf-432f-82ac-0ecccea9ac9e)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/e7aba88a-644a-4805-ad34-751eca3dd64e)
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/7b24a335-d606-47ea-9c5f-d8d665edb092)
+
+При нескольких попытках четырех эпох было мало для обучения. В ходе работы с разными значениями эпох обучения я выяснил, что начиная с третьей-четвертой эпохи значение Total Error всегда было равно 4. Следовательно - однослойный перцептрон не может обучиться этой операции.
+
+Поискав информацию в интернете и почитав больше данных о персептроне, я выяснил, что однослойный персептрон в силах решать только линейные задачи, а операция XOR не является линейной.
+
+Эту задачу с помощью персептрона можно решить следующим способом: применим формулу ``` x XOR y = (x Or y) AND (x NAND y) ```. Для этого я создал еще две треннировочные модели (tsOr и tsNAND). А в модели ts использовал логику обычного умножения. Когда первые две модели оттренировались, их значения я положил в функцию CalcOutput после тренировки модели умножения. В итоге у меня получился следующий код:
+
+```C#
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class TrainingSet
+{
+	public double[] input;
+	public double output;
+}
+
+public class Perceptron : MonoBehaviour {
+	public TrainingSet[] tsOR;
+	public TrainingSet[] tsNAND;
+	public TrainingSet[] ts;
+	double[] weights = {0,0};
+	double bias = 0;
+	double totalError = 0;
+
+	double DotProductBias(double[] v1, double[] v2) 
+	{
+		if (v1 == null || v2 == null)
+			return -1;
+	 
+		if (v1.Length != v2.Length)
+			return -1;
+	 
+		double d = 0;
+		for (int x = 0; x < v1.Length; x++)
+		{
+			d += v1[x] * v2[x];
+		}
+
+		d += bias;
+	 
+		return d;
+	}
+
+	double CalcOutput(int i, TrainingSet[] set)
+	{
+		double dp = DotProductBias(weights,set[i].input);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void InitialiseWeights()
+	{
+		for(int i = 0; i < weights.Length; i++)
+		{
+			weights[i] = Random.Range(-1.0f,1.0f);
+		}
+		bias = Random.Range(-1.0f,1.0f);
+	}
+
+	void UpdateWeights(int j, TrainingSet[] set)
+	{
+		double error = set[j].output - CalcOutput(j, set);
+		totalError += Mathf.Abs((float)error);
+		for(int i = 0; i < weights.Length; i++)
+		{			
+			weights[i] = weights[i] + error * set[j].input[i]; 
+		}
+		bias += error;
+	}
+
+	double CalcOutput(double i1, double i2)
+	{
+		double[] inp = new double[] {i1, i2};
+		double dp = DotProductBias(weights,inp);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void Train(int epochs, TrainingSet[] set)
+	{
+		InitialiseWeights();
+		
+		for(int e = 0; e < epochs; e++)
+		{
+			totalError = 0;
+			for(int t = 0; t < set.Length; t++)
+			{
+				UpdateWeights(t, set);
+				Debug.Log("W1: " + (weights[0]) + " W2: " + (weights[1]) + " B: " + bias);
+			}
+			Debug.Log("TOTAL ERROR: " + totalError);
+		}
+	}
+
+	void Start () {
+		Train(8, tsOR);
+		double tsOr0 = CalcOutput(0,0); //0
+		double tsOr1 = CalcOutput(0,1); //1
+		double tsOr2 = CalcOutput(1,0); //1
+		double tsOr3 = CalcOutput(1,1); //1
+		
+		Train(8, tsNAND);
+		double tsNAND0 = CalcOutput(0,0); //1
+		double tsNAND1 = CalcOutput(0,1); //1
+		double tsNAND2 = CalcOutput(1,0); //1
+		double tsNAND3 = CalcOutput(1,1); //0
+
+		Train(8, ts);
+		Debug.Log("Test 0 0: " + CalcOutput(tsOr0, tsNAND0));
+		Debug.Log("Test 0 1: " + CalcOutput(tsOr1, tsNAND1));
+		Debug.Log("Test 1 0: " + CalcOutput(tsOr2, tsNAND2));
+		Debug.Log("Test 1 1: " + CalcOutput(tsOr3, tsNAND3));		
+	}
+	
+	void Update () {
+		
+	}
+}
+
+```
+
+- В итоге, после выполнения 8 эпох обучения у каждой модели мы получаем результат, который является верным для даннйо операции:
+![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6b0ec1b0-cee3-488d-a729-6041bb67710e)
+
+Опять же, подробный отчет по эпохам тренировок будет указан во втором задании.
 
 ## Задание 2
 ### С помощью скрипта на языке Python заполнитm google-таблицу данными, описывающими выбранную игровую переменную в выбранной игре. Средствами google-sheets визуализируйте данные в google-таблице для наглядного представления выбранной игровой величины.
