@@ -552,18 +552,19 @@ public class Perceptron : MonoBehaviour {
 ### OR (Логическое сложение(ИЛИ)):
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/6409610f-2729-41f5-8c3b-9d7dad0fcaaa)
 
-Результат:
+- Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/2ebc2721-951b-4b4e-8618-0025b91a07e9)
-
+- Процесс выполнения:
+![203351408-9844174f-4b46-4eed-9e82-bceece979c1a](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0f123e5e-d264-4f4c-a8cf-bfaf1fb74056)
 
 
 
 ### AND (Логическое умножение(И)):
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/f5d0c9a1-7973-4045-b6cd-913138e46b42)
 
-Результат:
+- Результат:
 ![image](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0fb4853e-3e4e-4f4a-892b-835ea6a8c2e7)
-Процесс выполнения:
+- Процесс выполнения:
 ![203351408-9844174f-4b46-4eed-9e82-bceece979c1a](https://github.com/Yeager07/DA-in-GameDev-lab1/assets/127008112/0f123e5e-d264-4f4c-a8cf-bfaf1fb74056)
 
 
