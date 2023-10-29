@@ -64,7 +64,8 @@
 | GitHub | [plugins/github/README.md][PlGh] |
 | Visual Studio| [plugins/visualstudio/README.md][PlGh] |
 | Unity | [plugins/unity/README.md][PlMe] |
-| Pucharm | [plugins/pycharm/README.md][PlGa] |
+| Pycharm | [plugins/pycharm/README.md][PlGa] |
+| anaconda Prompt | [plugins/anacondaprompt/README.md][PlGa] |
 
 ## Powered by
 
